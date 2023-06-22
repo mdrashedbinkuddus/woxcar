@@ -160,6 +160,12 @@ class _FavCardWidgetState extends State<FavCardWidget> {
                                   [stackPostsRecord.reference]),
                             };
                             await currentUserReference!.update(usersUpdateData);
+
+                            final postsUpdateData = {
+                              'liked_by': FieldValue.arrayRemove(
+                                  [currentUserReference]),
+                            };
+                            await widget.postRef!.update(postsUpdateData);
                             setState(() {
                               _model.showPopup = false;
                             });
