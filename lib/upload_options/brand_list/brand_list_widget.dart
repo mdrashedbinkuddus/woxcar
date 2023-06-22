@@ -1,0 +1,136 @@
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'brand_list_model.dart';
+export 'brand_list_model.dart';
+
+class BrandListWidget extends StatefulWidget {
+  const BrandListWidget({Key? key}) : super(key: key);
+
+  @override
+  _BrandListWidgetState createState() => _BrandListWidgetState();
+}
+
+class _BrandListWidgetState extends State<BrandListWidget> {
+  late BrandListModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => BrandListModel());
+  }
+
+  @override
+  void dispose() {
+    _model.maybeDispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        color: FlutterFlowTheme.of(context).secondaryBackground,
+      ),
+      child: Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                    child: Icon(
+                      Icons.chevron_left_rounded,
+                      color: Colors.black,
+                      size: 30.0,
+                    ),
+                  ),
+                  Text(
+                    'Brand',
+                    style: FlutterFlowTheme.of(context).bodyLarge.override(
+                          fontFamily: 'Noto Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                  ),
+                ],
+              ),
+            ),
+            Builder(
+              builder: (context) {
+                final brands = FFAppState().BrandList.toList();
+                return Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: List.generate(brands.length, (brandsIndex) {
+                    final brandsItem = brands[brandsIndex];
+                    return Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            Navigator.pop(context, brandsItem);
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                brandsItem,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .override(
+                                      fontFamily: 'Noto Sans',
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 20.0,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          height: 30.0,
+                          thickness: 1.0,
+                          color: FlutterFlowTheme.of(context).accent4,
+                        ),
+                      ],
+                    );
+                  }),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

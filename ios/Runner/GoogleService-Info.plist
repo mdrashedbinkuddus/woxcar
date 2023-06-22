@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>182992990950-trcgpaiph515v8tfs333ovrvi65r9h8b.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.182992990950-trcgpaiph515v8tfs333ovrvi65r9h8b</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>182992990950-5ak2gdvoorjfbt98s66bc922qsniagu4.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDWlSm2_trg6EMWhJJ4fvUmRx312GNDBto</string>
+	<key>GCM_SENDER_ID</key>
+	<string>182992990950</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.woxcars.users</string>
+	<key>PROJECT_ID</key>
+	<string>zwapp002</string>
+	<key>STORAGE_BUCKET</key>
+	<string>zwapp002.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:182992990950:ios:785e02c0b99f165b848127</string>
+</dict>
+</plist>

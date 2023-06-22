@@ -1,0 +1,142 @@
+{
+  "project_info": {
+    "project_number": "182992990950",
+    "project_id": "zwapp002",
+    "storage_bucket": "zwapp002.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182992990950:android:29cc84d3cf759959848127",
+        "android_client_info": {
+          "package_name": "com.mycompany.zwapplikeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182992990950-fh44b6nmp1ckt4l5q1gimp2eo9ojd2jm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.zwapplikeapp",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "182992990950-f7hup7sjr5ojjfiajir8goeer62q6hhr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqyG3FyUBrSTBAvNA01KhWhRjCUqu9vV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182992990950-f7hup7sjr5ojjfiajir8goeer62q6hhr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "182992990950-2ek31q7e195nd8pp3s0vci4r8bctrtkh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.zwapplikeapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182992990950:android:1e81a028d62eddae848127",
+        "android_client_info": {
+          "package_name": "com.woxcars.users"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182992990950-5ak2gdvoorjfbt98s66bc922qsniagu4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.woxcars.users",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "182992990950-f7hup7sjr5ojjfiajir8goeer62q6hhr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqyG3FyUBrSTBAvNA01KhWhRjCUqu9vV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182992990950-f7hup7sjr5ojjfiajir8goeer62q6hhr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "182992990950-2ek31q7e195nd8pp3s0vci4r8bctrtkh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.zwapplikeapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182992990950:android:8f19335e81b23684848127",
+        "android_client_info": {
+          "package_name": "com.zwapp.user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182992990950-rj03pmcqihtaa4p448t4bmqpf4bq17qv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zwapp.user",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "182992990950-f7hup7sjr5ojjfiajir8goeer62q6hhr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqyG3FyUBrSTBAvNA01KhWhRjCUqu9vV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182992990950-f7hup7sjr5ojjfiajir8goeer62q6hhr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "182992990950-2ek31q7e195nd8pp3s0vci4r8bctrtkh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.zwapplikeapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

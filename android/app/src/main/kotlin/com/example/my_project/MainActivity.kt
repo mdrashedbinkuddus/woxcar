@@ -1,0 +1,6 @@
+package com.woxcars.users
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
