@@ -53,9 +53,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         body: SafeArea(
           top: true,
           child: StreamBuilder<List<PostsRecord>>(
-            stream: FFAppState().videoList(
-              requestFn: () => queryPostsRecord(),
-            ),
+            stream: queryPostsRecord(),
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.
               if (!snapshot.hasData) {

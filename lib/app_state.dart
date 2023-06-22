@@ -121,21 +121,6 @@ class FFAppState extends ChangeNotifier {
     _Transmission[_index] = updateFn(_Transmission[_index]);
   }
 
-  final _videoListManager = StreamRequestManager<List<PostsRecord>>();
-  Stream<List<PostsRecord>> videoList({
-    String? uniqueQueryKey,
-    bool? overrideCache,
-    required Stream<List<PostsRecord>> Function() requestFn,
-  }) =>
-      _videoListManager.performRequest(
-        uniqueQueryKey: uniqueQueryKey,
-        overrideCache: overrideCache,
-        requestFn: requestFn,
-      );
-  void clearVideoListCache() => _videoListManager.clear();
-  void clearVideoListCacheKey(String? uniqueKey) =>
-      _videoListManager.clearRequest(uniqueKey);
-
   final _postDetailsManager = StreamRequestManager<PostsRecord>();
   Stream<PostsRecord> postDetails({
     String? uniqueQueryKey,
