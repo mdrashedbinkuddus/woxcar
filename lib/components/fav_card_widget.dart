@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -154,7 +155,14 @@ class _FavCardWidgetState extends State<FavCardWidget> {
                       children: [
                         FFButtonWidget(
                           onPressed: () async {
-                            await stackPostsRecord.reference.delete();
+                            final usersUpdateData = {
+                              'fav_list': FieldValue.arrayRemove(
+                                  [stackPostsRecord.reference]),
+                            };
+                            await currentUserReference!.update(usersUpdateData);
+                            setState(() {
+                              _model.showPopup = false;
+                            });
                           },
                           text: 'Confirm',
                           options: FFButtonOptions(
