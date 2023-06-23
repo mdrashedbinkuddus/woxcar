@@ -262,29 +262,26 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                                         fontWeight: FontWeight.w500,
                                       ),
                                 ),
-                                Expanded(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFFE6EFFE),
-                                      borderRadius: BorderRadius.circular(15.0),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          30.0, 5.0, 30.0, 5.0),
-                                      child: Text(
-                                        postDetailsPostsRecord.negociable
-                                            ? 'Yes'
-                                            : 'No',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyLarge
-                                            .override(
-                                              fontFamily: 'Noto Sans',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFE6EFFE),
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        30.0, 5.0, 30.0, 5.0),
+                                    child: Text(
+                                      postDetailsPostsRecord.negociable
+                                          ? 'Yes'
+                                          : 'No',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Noto Sans',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                     ),
                                   ),
                                 ),

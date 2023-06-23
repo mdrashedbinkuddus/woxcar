@@ -1822,7 +1822,7 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 30.0),
+                                    0.0, 0.0, 0.0, 40.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
                                   focusColor: Colors.transparent,
@@ -1937,82 +1937,116 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                             .validate()) {
                                       return;
                                     }
+                                    if ((_model.brandName != null &&
+                                            _model.brandName != '') &&
+                                        (_model.gearBox != null &&
+                                            _model.gearBox != '') &&
+                                        (_model.km != null) &&
+                                        (_model.year != null) &&
+                                        (_model.engine != null &&
+                                            _model.engine != '') &&
+                                        (_model.fuel != null &&
+                                            _model.fuel != '') &&
+                                        (_model.hp != null) &&
+                                        (_model.transmission != null &&
+                                            _model.transmission != '')) {
+                                      setState(() {
+                                        _model.checkAllInput = false;
+                                      });
 
-                                    var postsRecordReference =
-                                        PostsRecord.collection.doc();
-                                    await postsRecordReference.set({
-                                      ...createPostsRecordData(
-                                        video: _model.uploadedvideo,
-                                        title: _model.titleController.text,
-                                        description:
-                                            _model.descriptionController.text,
-                                        phoneNumber:
-                                            _model.phoneNumberController.text,
-                                        whatsappNumber: _model
-                                            .whatsappNumberController.text,
-                                        location:
-                                            _model.locationController.text,
-                                        details: createProductDetailsStruct(
-                                          brand: _model.brandName,
-                                          gearbox: _model.gearBox,
-                                          km: _model.km,
-                                          year: _model.year?.toString(),
-                                          engine: _model.engine,
-                                          fuel: _model.fuel,
-                                          hp: _model.hp?.toString(),
-                                          transmission: _model.transmission,
-                                          clearUnsetFields: false,
-                                          create: true,
+                                      var postsRecordReference =
+                                          PostsRecord.collection.doc();
+                                      await postsRecordReference.set({
+                                        ...createPostsRecordData(
+                                          video: _model.uploadedvideo,
+                                          title: _model.titleController.text,
+                                          description:
+                                              _model.descriptionController.text,
+                                          phoneNumber:
+                                              _model.phoneNumberController.text,
+                                          whatsappNumber: _model
+                                              .whatsappNumberController.text,
+                                          location:
+                                              _model.locationController.text,
+                                          details: createProductDetailsStruct(
+                                            brand: _model.brandName,
+                                            gearbox: _model.gearBox,
+                                            km: _model.km,
+                                            year: _model.year?.toString(),
+                                            engine: _model.engine,
+                                            fuel: _model.fuel,
+                                            hp: _model.hp?.toString(),
+                                            transmission: _model.transmission,
+                                            clearUnsetFields: false,
+                                            create: true,
+                                          ),
+                                          negociable: _model.isNegotiable,
+                                          postedBy: currentUserReference,
+                                          tradeType: _model.tradeType,
+                                          price: double.tryParse(
+                                              _model.priceController.text),
                                         ),
-                                        negociable: _model.isNegotiable,
-                                        postedBy: currentUserReference,
-                                        tradeType: _model.tradeType,
-                                        price: double.tryParse(
-                                            _model.priceController.text),
-                                      ),
-                                      'Keywords': [
-                                        _model.keywordsController.text
-                                      ],
-                                      'images': _model.images,
-                                    });
-                                    _model.uploadContent =
-                                        PostsRecord.getDocumentFromData({
-                                      ...createPostsRecordData(
-                                        video: _model.uploadedvideo,
-                                        title: _model.titleController.text,
-                                        description:
-                                            _model.descriptionController.text,
-                                        phoneNumber:
-                                            _model.phoneNumberController.text,
-                                        whatsappNumber: _model
-                                            .whatsappNumberController.text,
-                                        location:
-                                            _model.locationController.text,
-                                        details: createProductDetailsStruct(
-                                          brand: _model.brandName,
-                                          gearbox: _model.gearBox,
-                                          km: _model.km,
-                                          year: _model.year?.toString(),
-                                          engine: _model.engine,
-                                          fuel: _model.fuel,
-                                          hp: _model.hp?.toString(),
-                                          transmission: _model.transmission,
-                                          clearUnsetFields: false,
-                                          create: true,
+                                        'Keywords': [
+                                          _model.keywordsController.text
+                                        ],
+                                        'images': _model.images,
+                                      });
+                                      _model.uploadContent =
+                                          PostsRecord.getDocumentFromData({
+                                        ...createPostsRecordData(
+                                          video: _model.uploadedvideo,
+                                          title: _model.titleController.text,
+                                          description:
+                                              _model.descriptionController.text,
+                                          phoneNumber:
+                                              _model.phoneNumberController.text,
+                                          whatsappNumber: _model
+                                              .whatsappNumberController.text,
+                                          location:
+                                              _model.locationController.text,
+                                          details: createProductDetailsStruct(
+                                            brand: _model.brandName,
+                                            gearbox: _model.gearBox,
+                                            km: _model.km,
+                                            year: _model.year?.toString(),
+                                            engine: _model.engine,
+                                            fuel: _model.fuel,
+                                            hp: _model.hp?.toString(),
+                                            transmission: _model.transmission,
+                                            clearUnsetFields: false,
+                                            create: true,
+                                          ),
+                                          negociable: _model.isNegotiable,
+                                          postedBy: currentUserReference,
+                                          tradeType: _model.tradeType,
+                                          price: double.tryParse(
+                                              _model.priceController.text),
                                         ),
-                                        negociable: _model.isNegotiable,
-                                        postedBy: currentUserReference,
-                                        tradeType: _model.tradeType,
-                                        price: double.tryParse(
-                                            _model.priceController.text),
-                                      ),
-                                      'Keywords': [
-                                        _model.keywordsController.text
-                                      ],
-                                      'images': _model.images,
-                                    }, postsRecordReference);
+                                        'Keywords': [
+                                          _model.keywordsController.text
+                                        ],
+                                        'images': _model.images,
+                                      }, postsRecordReference);
 
-                                    context.goNamed('VideoPlayer');
+                                      context.goNamed('VideoPlayer');
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'All fields are required',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 2000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .error,
+                                        ),
+                                      );
+                                    }
 
                                     setState(() {});
                                   },
