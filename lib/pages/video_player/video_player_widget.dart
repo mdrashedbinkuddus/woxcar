@@ -100,7 +100,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                         }
                       },
                       child: Stack(
-                        alignment: AlignmentDirectional(0.0, 1.0),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         children: [
                           FlutterFlowVideoPlayer(
                             path: pageViewPostsRecord.video,
@@ -113,172 +113,370 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                             allowPlaybackSpeedMenu: false,
                             pauseOnNavigate: false,
                           ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    OptionsWidget(
-                                      key: Key(
-                                          'Keyr4k_${pageViewIndex}_of_${pageViewPostsRecordList.length}'),
-                                    ),
-                                  ],
-                                ),
+                          Align(
+                            alignment: AlignmentDirectional(0.0, -1.0),
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  OptionsWidget(
+                                    key: Key(
+                                        'Keyr4k_${pageViewIndex}_of_${pageViewPostsRecordList.length}'),
+                                  ),
+                                ],
                               ),
-                              Expanded(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          20.0, 0.0, 0.0, 65.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
+                            ),
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(-1.0, 1.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 0.0, 0.0, 65.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 10.0, 0.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            context.pushNamed('Profile');
+                                          },
+                                          child: Container(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            clipBehavior: Clip.antiAlias,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Image.network(
+                                              'https://picsum.photos/seed/906/600',
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              context.pushNamed(
+                                                'PostDetails',
+                                                queryParameters: {
+                                                  'postRef': serializeParam(
+                                                    pageViewPostsRecord
+                                                        .reference,
+                                                    ParamType.DocumentReference,
+                                                  ),
+                                                }.withoutNulls,
+                                              );
+                                            },
+                                            child: Text(
+                                              pageViewPostsRecord.title
+                                                  .maybeHandleOverflow(
+                                                maxChars: 15,
+                                                replacement: '…',
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleMedium
+                                                      .override(
+                                                        fontFamily: 'Noto Sans',
+                                                        fontSize: 24.0,
+                                                      ),
+                                            ),
+                                          ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
                                             children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 10.0, 0.0),
-                                                child: InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    context
-                                                        .pushNamed('Profile');
-                                                  },
-                                                  child: Container(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    clipBehavior:
-                                                        Clip.antiAlias,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                    child: Image.network(
-                                                      'https://picsum.photos/seed/906/600',
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                ),
+                                              Icon(
+                                                Icons.location_on,
+                                                color: Color(0xFFEA5656),
+                                                size: 24.0,
                                               ),
-                                              Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      context.pushNamed(
-                                                        'PostDetails',
-                                                        queryParameters: {
-                                                          'postRef':
-                                                              serializeParam(
-                                                            pageViewPostsRecord
-                                                                .reference,
-                                                            ParamType
-                                                                .DocumentReference,
-                                                          ),
-                                                        }.withoutNulls,
-                                                      );
-                                                    },
-                                                    child: Text(
-                                                      pageViewPostsRecord.title,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Noto Sans',
-                                                                fontSize: 24.0,
-                                                              ),
-                                                    ),
-                                                  ),
-                                                  Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      Icon(
-                                                        Icons.location_on,
-                                                        color:
-                                                            Color(0xFFEA5656),
-                                                        size: 24.0,
-                                                      ),
-                                                      Text(
-                                                        pageViewPostsRecord
-                                                            .location,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleSmall,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
+                                              Text(
+                                                pageViewPostsRecord.location,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall,
                                               ),
                                             ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 12.0, 0.0, 20.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Color(0xFFEDFFE8),
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            12.0, 5.0, 12.0, 5.0),
+                                        child: Text(
+                                          formatNumber(
+                                            pageViewPostsRecord.price,
+                                            formatType: FormatType.decimal,
+                                            decimalType: DecimalType.automatic,
+                                            currency: '\$',
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .titleSmall
+                                              .override(
+                                                fontFamily: 'Noto Sans',
+                                                color: Color(0xFF369627),
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(1.0, 0.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 10.0, 0.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 20.0, 0.0, 100.0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        await showModalBottomSheet(
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.transparent,
+                                          enableDrag: false,
+                                          context: context,
+                                          builder: (context) {
+                                            return GestureDetector(
+                                              onTap: () =>
+                                                  FocusScope.of(context)
+                                                      .requestFocus(
+                                                          _model.unfocusNode),
+                                              child: Padding(
+                                                padding: MediaQuery.of(context)
+                                                    .viewInsets,
+                                                child: Scaffold(
+                                                  body: GestureDetector(
+                                                    onTap: () =>
+                                                        Navigator.pop(context),
+                                                  ),
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  bottomSheet: SearchWidget(),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ).then((value) => setState(() {}));
+                                      },
+                                      child: Icon(
+                                        Icons.search_rounded,
+                                        color: Colors.white,
+                                        size: 30.0,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 20.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 20.0, 0.0, 20.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await launchUrl(Uri(
+                                                  scheme: 'tel',
+                                                  path: pageViewPostsRecord
+                                                      .phoneNumber,
+                                                ));
+                                              },
+                                              child: FaIcon(
+                                                FontAwesomeIcons.phone,
+                                                color: Colors.white,
+                                                size: 24.0,
+                                              ),
+                                            ),
                                           ),
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 12.0, 0.0, 20.0),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                color: Color(0xFFEDFFE8),
-                                                borderRadius:
-                                                    BorderRadius.circular(15.0),
+                                                    0.0, 20.0, 0.0, 20.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await launchURL(
+                                                    'https://api.whatsapp.com/send?phone=${pageViewPostsRecord.whatsappNumber}&text=Hello');
+                                              },
+                                              child: FaIcon(
+                                                FontAwesomeIcons.whatsapp,
+                                                color: Colors.white,
+                                                size: 30.0,
                                               ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        12.0, 5.0, 12.0, 5.0),
-                                                child: Text(
-                                                  formatNumber(
-                                                    pageViewPostsRecord.price,
-                                                    formatType:
-                                                        FormatType.decimal,
-                                                    decimalType:
-                                                        DecimalType.automatic,
-                                                    currency: '\$',
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .titleSmall
-                                                      .override(
-                                                        fontFamily: 'Noto Sans',
-                                                        color:
-                                                            Color(0xFF369627),
-                                                      ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 20.0, 0.0, 20.0),
+                                            child: Icon(
+                                              Icons.chat_bubble,
+                                              color: Colors.white,
+                                              size: 30.0,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 10.0, 0.0, 10.0),
+                                            child: ToggleIcon(
+                                              onPressed: () async {
+                                                final likedByElement =
+                                                    currentUserReference;
+                                                final likedByUpdate =
+                                                    pageViewPostsRecord.likedBy
+                                                            .contains(
+                                                                likedByElement)
+                                                        ? FieldValue
+                                                            .arrayRemove([
+                                                            likedByElement
+                                                          ])
+                                                        : FieldValue.arrayUnion(
+                                                            [likedByElement]);
+                                                await pageViewPostsRecord
+                                                    .reference
+                                                    .update({
+                                                  'liked_by': likedByUpdate,
+                                                });
+                                                if (pageViewPostsRecord.likedBy
+                                                    .contains(
+                                                        currentUserReference)) {
+                                                  await pageViewPostsRecord
+                                                      .reference
+                                                      .update({
+                                                    'liked_by':
+                                                        FieldValue.arrayRemove([
+                                                      currentUserReference
+                                                    ]),
+                                                  });
+
+                                                  await currentUserReference!
+                                                      .update({
+                                                    'fav_list':
+                                                        FieldValue.arrayRemove([
+                                                      pageViewPostsRecord
+                                                          .reference
+                                                    ]),
+                                                  });
+                                                } else {
+                                                  await pageViewPostsRecord
+                                                      .reference
+                                                      .update({
+                                                    'liked_by':
+                                                        FieldValue.arrayUnion([
+                                                      currentUserReference
+                                                    ]),
+                                                  });
+
+                                                  await currentUserReference!
+                                                      .update({
+                                                    'fav_list':
+                                                        FieldValue.arrayUnion([
+                                                      pageViewPostsRecord
+                                                          .reference
+                                                    ]),
+                                                  });
+                                                }
+                                              },
+                                              value: pageViewPostsRecord.likedBy
+                                                  .contains(
+                                                      currentUserReference),
+                                              onIcon: Icon(
+                                                Icons.favorite_rounded,
+                                                color: Color(0xFFFF1818),
+                                                size: 30.0,
+                                              ),
+                                              offIcon: Icon(
+                                                Icons.favorite_border_rounded,
+                                                color: Colors.white,
+                                                size: 30.0,
+                                              ),
+                                            ),
+                                          ),
+                                          Builder(
+                                            builder: (context) => Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 20.0, 0.0, 20.0),
+                                              child: InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  await Share.share(
+                                                    '',
+                                                    sharePositionOrigin:
+                                                        getWidgetBoundingBox(
+                                                            context),
+                                                  );
+                                                },
+                                                child: FaIcon(
+                                                  FontAwesomeIcons.share,
+                                                  color: Colors.white,
+                                                  size: 30.0,
                                                 ),
                                               ),
                                             ),
@@ -286,287 +484,36 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                                         ],
                                       ),
                                     ),
-                                    Align(
-                                      alignment: AlignmentDirectional(1.0, 0.0),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 10.0, 0.0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 20.0, 0.0, 100.0),
-                                              child: InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () => FocusScope
-                                                                .of(context)
-                                                            .requestFocus(_model
-                                                                .unfocusNode),
-                                                        child: Padding(
-                                                          padding:
-                                                              MediaQuery.of(
-                                                                      context)
-                                                                  .viewInsets,
-                                                          child: Scaffold(
-                                                            body:
-                                                                GestureDetector(
-                                                              onTap: () =>
-                                                                  Navigator.pop(
-                                                                      context),
-                                                            ),
-                                                            backgroundColor:
-                                                                Colors
-                                                                    .transparent,
-                                                            bottomSheet:
-                                                                SearchWidget(),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      setState(() {}));
-                                                },
-                                                child: Icon(
-                                                  Icons.search_rounded,
-                                                  color: Colors.white,
-                                                  size: 30.0,
-                                                ),
-                                              ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 110.0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        context.pushNamed(
+                                          'PostDetails',
+                                          queryParameters: {
+                                            'postRef': serializeParam(
+                                              pageViewPostsRecord.reference,
+                                              ParamType.DocumentReference,
                                             ),
-                                            Expanded(
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 0.0, 20.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  children: [
-                                                    InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        await launchUrl(Uri(
-                                                          scheme: 'tel',
-                                                          path:
-                                                              pageViewPostsRecord
-                                                                  .phoneNumber,
-                                                        ));
-                                                      },
-                                                      child: FaIcon(
-                                                        FontAwesomeIcons.phone,
-                                                        color: Colors.white,
-                                                        size: 24.0,
-                                                      ),
-                                                    ),
-                                                    InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        await launchURL(
-                                                            'https://api.whatsapp.com/send?phone=${pageViewPostsRecord.whatsappNumber}&text=Hello');
-                                                      },
-                                                      child: FaIcon(
-                                                        FontAwesomeIcons
-                                                            .whatsapp,
-                                                        color: Colors.white,
-                                                        size: 30.0,
-                                                      ),
-                                                    ),
-                                                    Icon(
-                                                      Icons.chat_bubble,
-                                                      color: Colors.white,
-                                                      size: 30.0,
-                                                    ),
-                                                    ToggleIcon(
-                                                      onPressed: () async {
-                                                        final likedByElement =
-                                                            currentUserReference;
-                                                        final likedByUpdate =
-                                                            pageViewPostsRecord
-                                                                    .likedBy
-                                                                    .contains(
-                                                                        likedByElement)
-                                                                ? FieldValue
-                                                                    .arrayRemove([
-                                                                    likedByElement
-                                                                  ])
-                                                                : FieldValue
-                                                                    .arrayUnion([
-                                                                    likedByElement
-                                                                  ]);
-                                                        await pageViewPostsRecord
-                                                            .reference
-                                                            .update({
-                                                          'liked_by':
-                                                              likedByUpdate,
-                                                        });
-                                                        if (pageViewPostsRecord
-                                                            .likedBy
-                                                            .contains(
-                                                                currentUserReference)) {
-                                                          await pageViewPostsRecord
-                                                              .reference
-                                                              .update({
-                                                            'liked_by': FieldValue
-                                                                .arrayRemove([
-                                                              currentUserReference
-                                                            ]),
-                                                          });
-
-                                                          await currentUserReference!
-                                                              .update({
-                                                            'fav_list': FieldValue
-                                                                .arrayRemove([
-                                                              pageViewPostsRecord
-                                                                  .reference
-                                                            ]),
-                                                          });
-                                                        } else {
-                                                          await pageViewPostsRecord
-                                                              .reference
-                                                              .update({
-                                                            'liked_by':
-                                                                FieldValue
-                                                                    .arrayUnion([
-                                                              currentUserReference
-                                                            ]),
-                                                          });
-
-                                                          await currentUserReference!
-                                                              .update({
-                                                            'fav_list':
-                                                                FieldValue
-                                                                    .arrayUnion([
-                                                              pageViewPostsRecord
-                                                                  .reference
-                                                            ]),
-                                                          });
-                                                        }
-                                                      },
-                                                      value: pageViewPostsRecord
-                                                          .likedBy
-                                                          .contains(
-                                                              currentUserReference),
-                                                      onIcon: Icon(
-                                                        Icons.favorite_rounded,
-                                                        color:
-                                                            Color(0xFFFF1818),
-                                                        size: 30.0,
-                                                      ),
-                                                      offIcon: Icon(
-                                                        Icons
-                                                            .favorite_border_rounded,
-                                                        color: Colors.white,
-                                                        size: 30.0,
-                                                      ),
-                                                    ),
-                                                    Builder(
-                                                      builder: (context) =>
-                                                          InkWell(
-                                                        splashColor:
-                                                            Colors.transparent,
-                                                        focusColor:
-                                                            Colors.transparent,
-                                                        hoverColor:
-                                                            Colors.transparent,
-                                                        highlightColor:
-                                                            Colors.transparent,
-                                                        onTap: () async {
-                                                          await Share.share(
-                                                            '',
-                                                            sharePositionOrigin:
-                                                                getWidgetBoundingBox(
-                                                                    context),
-                                                          );
-                                                        },
-                                                        child: FaIcon(
-                                                          FontAwesomeIcons
-                                                              .share,
-                                                          color: Colors.white,
-                                                          size: 30.0,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ]
-                                                      .divide(SizedBox(
-                                                          height: 40.0))
-                                                      .around(SizedBox(
-                                                          height: 40.0)),
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 110.0),
-                                              child: InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  context.pushNamed(
-                                                    'PostDetails',
-                                                    queryParameters: {
-                                                      'postRef': serializeParam(
-                                                        pageViewPostsRecord
-                                                            .reference,
-                                                        ParamType
-                                                            .DocumentReference,
-                                                      ),
-                                                    }.withoutNulls,
-                                                  );
-                                                },
-                                                child: Icon(
-                                                  Icons
-                                                      .keyboard_control_rounded,
-                                                  color: Colors.white,
-                                                  size: 30.0,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                          }.withoutNulls,
+                                        );
+                                      },
+                                      child: Icon(
+                                        Icons.keyboard_control_rounded,
+                                        color: Colors.white,
+                                        size: 30.0,
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ],
                       ),

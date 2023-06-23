@@ -84,6 +84,11 @@ class PostsRecord extends FirestoreRecord {
   double get price => _price ?? 0.0;
   bool hasPrice() => _price != null;
 
+  // "currency" field.
+  String? _currency;
+  String get currency => _currency ?? '';
+  bool hasCurrency() => _currency != null;
+
   void _initializeFields() {
     _images = getDataList(snapshotData['images']);
     _video = snapshotData['video'] as String?;
@@ -99,6 +104,7 @@ class PostsRecord extends FirestoreRecord {
     _postedBy = snapshotData['posted_by'] as DocumentReference?;
     _likedBy = getDataList(snapshotData['liked_by']);
     _price = castToType<double>(snapshotData['price']);
+    _currency = snapshotData['currency'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -146,6 +152,7 @@ Map<String, dynamic> createPostsRecordData({
   bool? negociable,
   DocumentReference? postedBy,
   double? price,
+  String? currency,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -160,6 +167,7 @@ Map<String, dynamic> createPostsRecordData({
       'Negociable': negociable,
       'posted_by': postedBy,
       'price': price,
+      'currency': currency,
     }.withoutNulls,
   );
 

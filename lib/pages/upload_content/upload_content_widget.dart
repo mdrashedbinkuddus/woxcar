@@ -1958,7 +1958,7 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                           PostsRecord.collection.doc();
                                       await postsRecordReference.set({
                                         ...createPostsRecordData(
-                                          video: _model.uploadedvideo,
+                                          video: _model.uploadedFileUrl2,
                                           title: _model.titleController.text,
                                           description:
                                               _model.descriptionController.text,
@@ -1985,6 +1985,7 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                           tradeType: _model.tradeType,
                                           price: double.tryParse(
                                               _model.priceController.text),
+                                          currency: _model.dropDownValue,
                                         ),
                                         'Keywords': [
                                           _model.keywordsController.text
@@ -1994,7 +1995,7 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                       _model.uploadContent =
                                           PostsRecord.getDocumentFromData({
                                         ...createPostsRecordData(
-                                          video: _model.uploadedvideo,
+                                          video: _model.uploadedFileUrl2,
                                           title: _model.titleController.text,
                                           description:
                                               _model.descriptionController.text,
@@ -2021,6 +2022,7 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                           tradeType: _model.tradeType,
                                           price: double.tryParse(
                                               _model.priceController.text),
+                                          currency: _model.dropDownValue,
                                         ),
                                         'Keywords': [
                                           _model.keywordsController.text
