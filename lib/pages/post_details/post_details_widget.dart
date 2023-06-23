@@ -47,6 +47,10 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
 
     return StreamBuilder<PostsRecord>(
       stream: FFAppState().postDetails(
+        uniqueQueryKey: valueOrDefault<String>(
+          widget.postRef?.id,
+          'null',
+        ),
         requestFn: () => PostsRecord.getDocument(widget.postRef!),
       ),
       builder: (context, snapshot) {
@@ -228,7 +232,7 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         10.0, 5.0, 10.0, 5.0),
                                     child: Text(
-                                      '\$4000',
+                                      postDetailsPostsRecord.price.toString(),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(
@@ -258,24 +262,29 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                                         fontWeight: FontWeight.w500,
                                       ),
                                 ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFE6EFFE),
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        30.0, 5.0, 30.0, 5.0),
-                                    child: Text(
-                                      'No',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyLarge
-                                          .override(
-                                            fontFamily: 'Noto Sans',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                Expanded(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFE6EFFE),
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          30.0, 5.0, 30.0, 5.0),
+                                      child: Text(
+                                        postDetailsPostsRecord.negociable
+                                            ? 'Yes'
+                                            : 'No',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .override(
+                                              fontFamily: 'Noto Sans',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -310,7 +319,7 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         10.0, 5.0, 10.0, 5.0),
                                     child: Text(
-                                      'Automative',
+                                      postDetailsPostsRecord.tradeType,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(

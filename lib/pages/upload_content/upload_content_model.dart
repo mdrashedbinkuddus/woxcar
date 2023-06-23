@@ -43,6 +43,8 @@ class UploadContentModel extends FlutterFlowModel {
 
   String? uploadedvideo;
 
+  bool checkAllInput = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -56,11 +58,6 @@ class UploadContentModel extends FlutterFlowModel {
   FFUploadedFile uploadedLocalFile2 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl2 = '';
-
-  bool isDataUploading3 = false;
-  FFUploadedFile uploadedLocalFile3 =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl3 = '';
 
   // State field(s) for title widget.
   TextEditingController? titleController;
@@ -194,5 +191,4 @@ class UploadContentModel extends FlutterFlowModel {
   Future selectType(BuildContext context) async {}
 
   /// Additional helper methods are added here.
-
 }

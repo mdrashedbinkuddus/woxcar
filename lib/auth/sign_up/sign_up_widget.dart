@@ -595,15 +595,14 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                               return;
                             }
 
-                            final usersCreateData = createUsersRecordData(
-                              email: _model.emailController.text,
-                              displayName:
-                                  '${_model.firstNameController.text} ${_model.lastNameController.text}',
-                              createdTime: getCurrentTimestamp,
-                            );
                             await UsersRecord.collection
                                 .doc(user.uid)
-                                .update(usersCreateData);
+                                .update(createUsersRecordData(
+                                  email: _model.emailController.text,
+                                  displayName:
+                                      '${_model.firstNameController.text} ${_model.lastNameController.text}',
+                                  createdTime: getCurrentTimestamp,
+                                ));
 
                             context.goNamedAuth('VideoPlayer', context.mounted);
                           },

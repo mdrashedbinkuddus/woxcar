@@ -253,6 +253,7 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                               size: 30.0,
                             ),
                             onPressed: () async {
+                              // uploadVideo
                               final selectedMedia = await selectMedia(
                                 isVideo: true,
                                 mediaSource: MediaSource.videoGallery,
@@ -318,10 +319,11 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                         FlutterFlowTheme.of(context).secondary,
                                   ),
                                 );
+                                setState(() {
+                                  _model.uploadedvideo =
+                                      _model.uploadedFileUrl2;
+                                });
                               }
-                              setState(() {
-                                _model.uploadedvideo = _model.uploadedFileUrl2;
-                              });
                             },
                           ),
                         ),
@@ -329,6 +331,15 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                     ],
                   ),
                 ),
+                if (_model.isDataUploading2)
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                    child: Text(
+                      'video uploading...',
+                      style: FlutterFlowTheme.of(context).bodyMedium,
+                    ),
+                  ),
                 Padding(
                   padding:
                       EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 20.0),
@@ -365,77 +376,14 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                           );
                         },
                       ),
-                      FlutterFlowIconButton(
-                        borderColor: FlutterFlowTheme.of(context).primary,
-                        borderRadius: 50.0,
-                        borderWidth: 1.0,
-                        buttonSize: 50.0,
-                        fillColor: FlutterFlowTheme.of(context).accent1,
-                        icon: Icon(
-                          Icons.add,
-                          color: FlutterFlowTheme.of(context).primary,
-                          size: 24.0,
-                        ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
-                        },
-                      ),
                     ],
                   ),
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
                   child: FFButtonWidget(
-                    onPressed: () async {
-                      final selectedMedia = await selectMedia(
-                        isVideo: true,
-                        mediaSource: MediaSource.videoGallery,
-                        multiImage: false,
-                      );
-                      if (selectedMedia != null &&
-                          selectedMedia.every((m) =>
-                              validateFileFormat(m.storagePath, context))) {
-                        setState(() => _model.isDataUploading3 = true);
-                        var selectedUploadedFiles = <FFUploadedFile>[];
-                        var downloadUrls = <String>[];
-                        try {
-                          selectedUploadedFiles = selectedMedia
-                              .map((m) => FFUploadedFile(
-                                    name: m.storagePath.split('/').last,
-                                    bytes: m.bytes,
-                                    height: m.dimensions?.height,
-                                    width: m.dimensions?.width,
-                                    blurHash: m.blurHash,
-                                  ))
-                              .toList();
-
-                          downloadUrls = (await Future.wait(
-                            selectedMedia.map(
-                              (m) async =>
-                                  await uploadData(m.storagePath, m.bytes),
-                            ),
-                          ))
-                              .where((u) => u != null)
-                              .map((u) => u!)
-                              .toList();
-                        } finally {
-                          _model.isDataUploading3 = false;
-                        }
-                        if (selectedUploadedFiles.length ==
-                                selectedMedia.length &&
-                            downloadUrls.length == selectedMedia.length) {
-                          setState(() {
-                            _model.uploadedLocalFile3 =
-                                selectedUploadedFiles.first;
-                            _model.uploadedFileUrl3 = downloadUrls.first;
-                          });
-                        } else {
-                          setState(() {});
-                          return;
-                        }
-                      }
-
-                      _model.audioFile = _model.uploadedFileUrl3;
+                    onPressed: () {
+                      print('Button pressed ...');
                     },
                     text: 'Background music',
                     options: FFButtonOptions(
@@ -1121,92 +1069,244 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  await showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    enableDrag: false,
-                                    context: context,
-                                    builder: (context) {
-                                      return GestureDetector(
-                                        onTap: () => FocusScope.of(context)
-                                            .requestFocus(_model.unfocusNode),
-                                        child: Padding(
-                                          padding:
-                                              MediaQuery.of(context).viewInsets,
-                                          child: BrandListWidget(),
-                                        ),
-                                      );
-                                    },
-                                  ).then((value) =>
-                                      setState(() => _model.brandName = value));
-
-                                  setState(() {});
-                                },
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Brand',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Noto Sans',
-                                            color: Colors.white,
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        if (_model.brandName != null &&
-                                            _model.brandName != '')
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 5.0, 10.0, 5.0),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                color: Color(0xFFD5DEFD),
-                                                borderRadius:
-                                                    BorderRadius.circular(15.0),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        15.0, 5.0, 15.0, 5.0),
-                                                child: Text(
-                                                  _model.brandName!,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Noto Sans',
-                                                        fontSize: 13.0,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      await showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        enableDrag: false,
+                                        context: context,
+                                        builder: (context) {
+                                          return GestureDetector(
+                                            onTap: () => FocusScope.of(context)
+                                                .requestFocus(
+                                                    _model.unfocusNode),
+                                            child: Padding(
+                                              padding: MediaQuery.of(context)
+                                                  .viewInsets,
+                                              child: Scaffold(
+                                                body: GestureDetector(
+                                                  onTap: () =>
+                                                      Navigator.pop(context),
                                                 ),
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                bottomSheet: BrandListWidget(),
                                               ),
                                             ),
-                                          ),
-                                        Icon(
-                                          Icons.arrow_forward_ios_rounded,
-                                          color: Colors.white,
-                                          size: 24.0,
+                                          );
+                                        },
+                                      ).then((value) => setState(
+                                          () => _model.brandName = value));
+
+                                      setState(() {});
+                                    },
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Brand',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Noto Sans',
+                                                color: Colors.white,
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            if (_model.brandName != null &&
+                                                _model.brandName != '')
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        10.0, 5.0, 10.0, 5.0),
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0xFFD5DEFD),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15.0),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(15.0, 5.0,
+                                                                15.0, 5.0),
+                                                    child: Text(
+                                                      _model.brandName!,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Noto Sans',
+                                                            fontSize: 13.0,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            Icon(
+                                              Icons.arrow_forward_ios_rounded,
+                                              color: Colors.white,
+                                              size: 24.0,
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  if (_model.checkAllInput &&
+                                      (_model.brandName == null ||
+                                          _model.brandName == ''))
+                                    Text(
+                                      'Brand is required',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelSmall
+                                          .override(
+                                            fontFamily: 'Noto Sans',
+                                            color: Colors.white,
+                                          ),
+                                    ),
+                                ],
+                              ),
+                              Divider(
+                                height: 40.0,
+                                thickness: 1.0,
+                                color: FlutterFlowTheme.of(context).accent4,
+                              ),
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      await showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        enableDrag: false,
+                                        context: context,
+                                        builder: (context) {
+                                          return GestureDetector(
+                                            onTap: () => FocusScope.of(context)
+                                                .requestFocus(
+                                                    _model.unfocusNode),
+                                            child: Padding(
+                                              padding: MediaQuery.of(context)
+                                                  .viewInsets,
+                                              child: Scaffold(
+                                                body: GestureDetector(
+                                                  onTap: () =>
+                                                      Navigator.pop(context),
+                                                ),
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                bottomSheet: GearboxWidget(),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ).then((value) => setState(
+                                          () => _model.gearBox = value));
+
+                                      setState(() {});
+                                    },
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Gearbox',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Noto Sans',
+                                                color: Colors.white,
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            if (_model.gearBox != null &&
+                                                _model.gearBox != '')
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        10.0, 5.0, 10.0, 5.0),
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0xFFD5DEFD),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15.0),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(15.0, 5.0,
+                                                                15.0, 5.0),
+                                                    child: Text(
+                                                      _model.gearBox!,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Noto Sans',
+                                                            fontSize: 13.0,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            Icon(
+                                              Icons.arrow_forward_ios_rounded,
+                                              color: Colors.white,
+                                              size: 24.0,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  if (_model.checkAllInput &&
+                                      (_model.gearBox == null ||
+                                          _model.gearBox == ''))
+                                    Text(
+                                      'Gearbox is required',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelSmall
+                                          .override(
+                                            fontFamily: 'Noto Sans',
+                                            color: Colors.white,
+                                          ),
+                                    ),
+                                ],
                               ),
                               Divider(
                                 height: 40.0,
@@ -1231,99 +1331,14 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                         child: Padding(
                                           padding:
                                               MediaQuery.of(context).viewInsets,
-                                          child: GearboxWidget(),
-                                        ),
-                                      );
-                                    },
-                                  ).then((value) =>
-                                      setState(() => _model.gearBox = value));
-
-                                  setState(() {});
-                                },
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Gearbox',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Noto Sans',
-                                            color: Colors.white,
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        if (_model.gearBox != null &&
-                                            _model.gearBox != '')
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 5.0, 10.0, 5.0),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                color: Color(0xFFD5DEFD),
-                                                borderRadius:
-                                                    BorderRadius.circular(15.0),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        15.0, 5.0, 15.0, 5.0),
-                                                child: Text(
-                                                  _model.gearBox!,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Noto Sans',
-                                                        fontSize: 13.0,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                ),
-                                              ),
+                                          child: Scaffold(
+                                            body: GestureDetector(
+                                              onTap: () =>
+                                                  Navigator.pop(context),
                                             ),
+                                            backgroundColor: Colors.transparent,
+                                            bottomSheet: KilometerWidget(),
                                           ),
-                                        Icon(
-                                          Icons.arrow_forward_ios_rounded,
-                                          color: Colors.white,
-                                          size: 24.0,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Divider(
-                                height: 40.0,
-                                thickness: 1.0,
-                                color: FlutterFlowTheme.of(context).accent4,
-                              ),
-                              InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  await showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    enableDrag: false,
-                                    context: context,
-                                    builder: (context) {
-                                      return GestureDetector(
-                                        onTap: () => FocusScope.of(context)
-                                            .requestFocus(_model.unfocusNode),
-                                        child: Padding(
-                                          padding:
-                                              MediaQuery.of(context).viewInsets,
-                                          child: KilometerWidget(),
                                         ),
                                       );
                                     },
@@ -1417,7 +1432,14 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                         child: Padding(
                                           padding:
                                               MediaQuery.of(context).viewInsets,
-                                          child: YearWidget(),
+                                          child: Scaffold(
+                                            body: GestureDetector(
+                                              onTap: () =>
+                                                  Navigator.pop(context),
+                                            ),
+                                            backgroundColor: Colors.transparent,
+                                            bottomSheet: YearWidget(),
+                                          ),
                                         ),
                                       );
                                     },
@@ -1511,7 +1533,14 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                         child: Padding(
                                           padding:
                                               MediaQuery.of(context).viewInsets,
-                                          child: EngineWidget(),
+                                          child: Scaffold(
+                                            body: GestureDetector(
+                                              onTap: () =>
+                                                  Navigator.pop(context),
+                                            ),
+                                            backgroundColor: Colors.transparent,
+                                            bottomSheet: EngineWidget(),
+                                          ),
                                         ),
                                       );
                                     },
@@ -1606,7 +1635,14 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                         child: Padding(
                                           padding:
                                               MediaQuery.of(context).viewInsets,
-                                          child: FuelWidget(),
+                                          child: Scaffold(
+                                            body: GestureDetector(
+                                              onTap: () =>
+                                                  Navigator.pop(context),
+                                            ),
+                                            backgroundColor: Colors.transparent,
+                                            bottomSheet: FuelWidget(),
+                                          ),
                                         ),
                                       );
                                     },
@@ -1701,7 +1737,14 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                         child: Padding(
                                           padding:
                                               MediaQuery.of(context).viewInsets,
-                                          child: HorsePowerWidget(),
+                                          child: Scaffold(
+                                            body: GestureDetector(
+                                              onTap: () =>
+                                                  Navigator.pop(context),
+                                            ),
+                                            backgroundColor: Colors.transparent,
+                                            bottomSheet: HorsePowerWidget(),
+                                          ),
                                         ),
                                       );
                                     },
@@ -1798,7 +1841,15 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                           child: Padding(
                                             padding: MediaQuery.of(context)
                                                 .viewInsets,
-                                            child: TransmissionWidget(),
+                                            child: Scaffold(
+                                              body: GestureDetector(
+                                                onTap: () =>
+                                                    Navigator.pop(context),
+                                              ),
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              bottomSheet: TransmissionWidget(),
+                                            ),
                                           ),
                                         );
                                       },
@@ -1878,13 +1929,18 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                     0.0, 0.0, 0.0, 100.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
+                                    setState(() {
+                                      _model.checkAllInput = true;
+                                    });
                                     if (_model.formKey.currentState == null ||
                                         !_model.formKey.currentState!
                                             .validate()) {
                                       return;
                                     }
 
-                                    final postsCreateData = {
+                                    var postsRecordReference =
+                                        PostsRecord.collection.doc();
+                                    await postsRecordReference.set({
                                       ...createPostsRecordData(
                                         video: _model.uploadedvideo,
                                         title: _model.titleController.text,
@@ -1918,15 +1974,43 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                         _model.keywordsController.text
                                       ],
                                       'images': _model.images,
-                                    };
-                                    var postsRecordReference =
-                                        PostsRecord.collection.doc();
-                                    await postsRecordReference
-                                        .set(postsCreateData);
+                                    });
                                     _model.uploadContent =
-                                        PostsRecord.getDocumentFromData(
-                                            postsCreateData,
-                                            postsRecordReference);
+                                        PostsRecord.getDocumentFromData({
+                                      ...createPostsRecordData(
+                                        video: _model.uploadedvideo,
+                                        title: _model.titleController.text,
+                                        description:
+                                            _model.descriptionController.text,
+                                        phoneNumber:
+                                            _model.phoneNumberController.text,
+                                        whatsappNumber: _model
+                                            .whatsappNumberController.text,
+                                        location:
+                                            _model.locationController.text,
+                                        details: createProductDetailsStruct(
+                                          brand: _model.brandName,
+                                          gearbox: _model.gearBox,
+                                          km: _model.km,
+                                          year: _model.year?.toString(),
+                                          engine: _model.engine,
+                                          fuel: _model.fuel,
+                                          hp: _model.hp?.toString(),
+                                          transmission: _model.transmission,
+                                          clearUnsetFields: false,
+                                          create: true,
+                                        ),
+                                        negociable: _model.isNegotiable,
+                                        postedBy: currentUserReference,
+                                        tradeType: _model.tradeType,
+                                        price: double.tryParse(
+                                            _model.priceController.text),
+                                      ),
+                                      'Keywords': [
+                                        _model.keywordsController.text
+                                      ],
+                                      'images': _model.images,
+                                    }, postsRecordReference);
 
                                     context.goNamed('VideoPlayer');
 

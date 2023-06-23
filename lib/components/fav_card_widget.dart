@@ -155,17 +155,15 @@ class _FavCardWidgetState extends State<FavCardWidget> {
                       children: [
                         FFButtonWidget(
                           onPressed: () async {
-                            final usersUpdateData = {
+                            await currentUserReference!.update({
                               'fav_list': FieldValue.arrayRemove(
                                   [stackPostsRecord.reference]),
-                            };
-                            await currentUserReference!.update(usersUpdateData);
+                            });
 
-                            final postsUpdateData = {
+                            await widget.postRef!.update({
                               'liked_by': FieldValue.arrayRemove(
                                   [currentUserReference]),
-                            };
-                            await widget.postRef!.update(postsUpdateData);
+                            });
                             setState(() {
                               _model.showPopup = false;
                             });

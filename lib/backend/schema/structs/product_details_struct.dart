@@ -238,10 +238,13 @@ ProductDetailsStruct createProductDetailsStruct({
 ProductDetailsStruct? updateProductDetailsStruct(
   ProductDetailsStruct? productDetails, {
   bool clearUnsetFields = true,
+  bool create = false,
 }) =>
     productDetails
-      ?..firestoreUtilData =
-          FirestoreUtilData(clearUnsetFields: clearUnsetFields);
+      ?..firestoreUtilData = FirestoreUtilData(
+        clearUnsetFields: clearUnsetFields,
+        create: create,
+      );
 
 void addProductDetailsStructData(
   Map<String, dynamic> firestoreData,

@@ -88,22 +88,19 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                       onDoubleTap: () async {
                         if (pageViewPostsRecord.likedBy
                             .contains(currentUserReference)) {
-                          final postsUpdateData1 = {
+                          await pageViewPostsRecord.reference.update({
                             'liked_by':
                                 FieldValue.arrayRemove([currentUserReference]),
-                          };
-                          await pageViewPostsRecord.reference
-                              .update(postsUpdateData1);
+                          });
                         } else {
-                          final postsUpdateData2 = {
+                          await pageViewPostsRecord.reference.update({
                             'liked_by':
                                 FieldValue.arrayUnion([currentUserReference]),
-                          };
-                          await pageViewPostsRecord.reference
-                              .update(postsUpdateData2);
+                          });
                         }
                       },
                       child: Stack(
+                        alignment: AlignmentDirectional(0.0, 1.0),
                         children: [
                           FlutterFlowVideoPlayer(
                             path: pageViewPostsRecord.video,
@@ -143,7 +140,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           20.0, 0.0, 0.0, 65.0),
                                       child: Column(
-                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisSize: MainAxisSize.min,
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         crossAxisAlignment:
@@ -327,7 +324,19 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                                                               MediaQuery.of(
                                                                       context)
                                                                   .viewInsets,
-                                                          child: SearchWidget(),
+                                                          child: Scaffold(
+                                                            body:
+                                                                GestureDetector(
+                                                              onTap: () =>
+                                                                  Navigator.pop(
+                                                                      context),
+                                                            ),
+                                                            backgroundColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            bottomSheet:
+                                                                SearchWidget(),
+                                                          ),
                                                         ),
                                                       );
                                                     },
@@ -341,157 +350,19 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                                                 ),
                                               ),
                                             ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 20.0),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      await launchUrl(Uri(
-                                                        scheme: 'tel',
-                                                        path:
-                                                            pageViewPostsRecord
-                                                                .phoneNumber,
-                                                      ));
-                                                    },
-                                                    child: FaIcon(
-                                                      FontAwesomeIcons.phone,
-                                                      color: Colors.white,
-                                                      size: 24.0,
-                                                    ),
-                                                  ),
-                                                  InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      await launchURL(
-                                                          'https://api.whatsapp.com/send?phone=${pageViewPostsRecord.whatsappNumber}&text=Hello');
-                                                    },
-                                                    child: FaIcon(
-                                                      FontAwesomeIcons.whatsapp,
-                                                      color: Colors.white,
-                                                      size: 30.0,
-                                                    ),
-                                                  ),
-                                                  Icon(
-                                                    Icons.chat_bubble,
-                                                    color: Colors.white,
-                                                    size: 30.0,
-                                                  ),
-                                                  ToggleIcon(
-                                                    onPressed: () async {
-                                                      final likedByElement =
-                                                          currentUserReference;
-                                                      final likedByUpdate =
-                                                          pageViewPostsRecord
-                                                                  .likedBy
-                                                                  .contains(
-                                                                      likedByElement)
-                                                              ? FieldValue
-                                                                  .arrayRemove([
-                                                                  likedByElement
-                                                                ])
-                                                              : FieldValue
-                                                                  .arrayUnion([
-                                                                  likedByElement
-                                                                ]);
-                                                      final postsUpdateData = {
-                                                        'liked_by':
-                                                            likedByUpdate,
-                                                      };
-                                                      await pageViewPostsRecord
-                                                          .reference
-                                                          .update(
-                                                              postsUpdateData);
-                                                      if (pageViewPostsRecord
-                                                          .likedBy
-                                                          .contains(
-                                                              currentUserReference)) {
-                                                        final postsUpdateData1 =
-                                                            {
-                                                          'liked_by': FieldValue
-                                                              .arrayRemove([
-                                                            currentUserReference
-                                                          ]),
-                                                        };
-                                                        await pageViewPostsRecord
-                                                            .reference
-                                                            .update(
-                                                                postsUpdateData1);
-
-                                                        final usersUpdateData1 =
-                                                            {
-                                                          'fav_list': FieldValue
-                                                              .arrayRemove([
-                                                            pageViewPostsRecord
-                                                                .reference
-                                                          ]),
-                                                        };
-                                                        await currentUserReference!
-                                                            .update(
-                                                                usersUpdateData1);
-                                                      } else {
-                                                        final postsUpdateData2 =
-                                                            {
-                                                          'liked_by': FieldValue
-                                                              .arrayUnion([
-                                                            currentUserReference
-                                                          ]),
-                                                        };
-                                                        await pageViewPostsRecord
-                                                            .reference
-                                                            .update(
-                                                                postsUpdateData2);
-
-                                                        final usersUpdateData2 =
-                                                            {
-                                                          'fav_list': FieldValue
-                                                              .arrayUnion([
-                                                            pageViewPostsRecord
-                                                                .reference
-                                                          ]),
-                                                        };
-                                                        await currentUserReference!
-                                                            .update(
-                                                                usersUpdateData2);
-                                                      }
-                                                    },
-                                                    value: pageViewPostsRecord
-                                                        .likedBy
-                                                        .contains(
-                                                            currentUserReference),
-                                                    onIcon: Icon(
-                                                      Icons.favorite_rounded,
-                                                      color: Color(0xFFFF1818),
-                                                      size: 30.0,
-                                                    ),
-                                                    offIcon: Icon(
-                                                      Icons
-                                                          .favorite_border_rounded,
-                                                      color: Colors.white,
-                                                      size: 30.0,
-                                                    ),
-                                                  ),
-                                                  Builder(
-                                                    builder: (context) =>
-                                                        InkWell(
+                                            Expanded(
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 0.0, 20.0),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: [
+                                                    InkWell(
                                                       splashColor:
                                                           Colors.transparent,
                                                       focusColor:
@@ -501,27 +372,160 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
-                                                        await Share.share(
-                                                          '',
-                                                          sharePositionOrigin:
-                                                              getWidgetBoundingBox(
-                                                                  context),
-                                                        );
+                                                        await launchUrl(Uri(
+                                                          scheme: 'tel',
+                                                          path:
+                                                              pageViewPostsRecord
+                                                                  .phoneNumber,
+                                                        ));
                                                       },
                                                       child: FaIcon(
-                                                        FontAwesomeIcons.share,
+                                                        FontAwesomeIcons.phone,
+                                                        color: Colors.white,
+                                                        size: 24.0,
+                                                      ),
+                                                    ),
+                                                    InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        await launchURL(
+                                                            'https://api.whatsapp.com/send?phone=${pageViewPostsRecord.whatsappNumber}&text=Hello');
+                                                      },
+                                                      child: FaIcon(
+                                                        FontAwesomeIcons
+                                                            .whatsapp,
                                                         color: Colors.white,
                                                         size: 30.0,
                                                       ),
                                                     ),
-                                                  ),
-                                                ]
-                                                    .divide(SizedBox(
-                                                      height: 40.0,
-                                                    ))
-                                                    .around(SizedBox(
-                                                      height: 40.0,
-                                                    )),
+                                                    Icon(
+                                                      Icons.chat_bubble,
+                                                      color: Colors.white,
+                                                      size: 30.0,
+                                                    ),
+                                                    ToggleIcon(
+                                                      onPressed: () async {
+                                                        final likedByElement =
+                                                            currentUserReference;
+                                                        final likedByUpdate =
+                                                            pageViewPostsRecord
+                                                                    .likedBy
+                                                                    .contains(
+                                                                        likedByElement)
+                                                                ? FieldValue
+                                                                    .arrayRemove([
+                                                                    likedByElement
+                                                                  ])
+                                                                : FieldValue
+                                                                    .arrayUnion([
+                                                                    likedByElement
+                                                                  ]);
+                                                        await pageViewPostsRecord
+                                                            .reference
+                                                            .update({
+                                                          'liked_by':
+                                                              likedByUpdate,
+                                                        });
+                                                        if (pageViewPostsRecord
+                                                            .likedBy
+                                                            .contains(
+                                                                currentUserReference)) {
+                                                          await pageViewPostsRecord
+                                                              .reference
+                                                              .update({
+                                                            'liked_by': FieldValue
+                                                                .arrayRemove([
+                                                              currentUserReference
+                                                            ]),
+                                                          });
+
+                                                          await currentUserReference!
+                                                              .update({
+                                                            'fav_list': FieldValue
+                                                                .arrayRemove([
+                                                              pageViewPostsRecord
+                                                                  .reference
+                                                            ]),
+                                                          });
+                                                        } else {
+                                                          await pageViewPostsRecord
+                                                              .reference
+                                                              .update({
+                                                            'liked_by':
+                                                                FieldValue
+                                                                    .arrayUnion([
+                                                              currentUserReference
+                                                            ]),
+                                                          });
+
+                                                          await currentUserReference!
+                                                              .update({
+                                                            'fav_list':
+                                                                FieldValue
+                                                                    .arrayUnion([
+                                                              pageViewPostsRecord
+                                                                  .reference
+                                                            ]),
+                                                          });
+                                                        }
+                                                      },
+                                                      value: pageViewPostsRecord
+                                                          .likedBy
+                                                          .contains(
+                                                              currentUserReference),
+                                                      onIcon: Icon(
+                                                        Icons.favorite_rounded,
+                                                        color:
+                                                            Color(0xFFFF1818),
+                                                        size: 30.0,
+                                                      ),
+                                                      offIcon: Icon(
+                                                        Icons
+                                                            .favorite_border_rounded,
+                                                        color: Colors.white,
+                                                        size: 30.0,
+                                                      ),
+                                                    ),
+                                                    Builder(
+                                                      builder: (context) =>
+                                                          InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          await Share.share(
+                                                            '',
+                                                            sharePositionOrigin:
+                                                                getWidgetBoundingBox(
+                                                                    context),
+                                                          );
+                                                        },
+                                                        child: FaIcon(
+                                                          FontAwesomeIcons
+                                                              .share,
+                                                          color: Colors.white,
+                                                          size: 30.0,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ]
+                                                      .divide(SizedBox(
+                                                          height: 40.0))
+                                                      .around(SizedBox(
+                                                          height: 40.0)),
+                                                ),
                                               ),
                                             ),
                                             Padding(
