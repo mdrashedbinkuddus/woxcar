@@ -59,6 +59,16 @@ class UsersRecord extends FirestoreRecord {
   List<DocumentReference> get favList => _favList ?? const [];
   bool hasFavList() => _favList != null;
 
+  // "bio" field.
+  String? _bio;
+  String get bio => _bio ?? '';
+  bool hasBio() => _bio != null;
+
+  // "website" field.
+  String? _website;
+  String get website => _website ?? '';
+  bool hasWebsite() => _website != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -69,6 +79,8 @@ class UsersRecord extends FirestoreRecord {
     _lastName = snapshotData['last_name'] as String?;
     _phoneNumber = snapshotData['phone_number'] as String?;
     _favList = getDataList(snapshotData['fav_list']);
+    _bio = snapshotData['bio'] as String?;
+    _website = snapshotData['website'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -113,6 +125,8 @@ Map<String, dynamic> createUsersRecordData({
   String? firstName,
   String? lastName,
   String? phoneNumber,
+  String? bio,
+  String? website,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -124,6 +138,8 @@ Map<String, dynamic> createUsersRecordData({
       'first_name': firstName,
       'last_name': lastName,
       'phone_number': phoneNumber,
+      'bio': bio,
+      'website': website,
     }.withoutNulls,
   );
 

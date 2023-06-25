@@ -1092,15 +1092,7 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                             child: Padding(
                                               padding: MediaQuery.of(context)
                                                   .viewInsets,
-                                              child: Scaffold(
-                                                body: GestureDetector(
-                                                  onTap: () =>
-                                                      Navigator.pop(context),
-                                                ),
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                bottomSheet: BrandListWidget(),
-                                              ),
+                                              child: BrandListWidget(),
                                             ),
                                           );
                                         },
@@ -1214,15 +1206,7 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                             child: Padding(
                                               padding: MediaQuery.of(context)
                                                   .viewInsets,
-                                              child: Scaffold(
-                                                body: GestureDetector(
-                                                  onTap: () =>
-                                                      Navigator.pop(context),
-                                                ),
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                bottomSheet: GearboxWidget(),
-                                              ),
+                                              child: GearboxWidget(),
                                             ),
                                           );
                                         },
@@ -1331,14 +1315,7 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                         child: Padding(
                                           padding:
                                               MediaQuery.of(context).viewInsets,
-                                          child: Scaffold(
-                                            body: GestureDetector(
-                                              onTap: () =>
-                                                  Navigator.pop(context),
-                                            ),
-                                            backgroundColor: Colors.transparent,
-                                            bottomSheet: KilometerWidget(),
-                                          ),
+                                          child: KilometerWidget(),
                                         ),
                                       );
                                     },
@@ -1432,14 +1409,7 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                         child: Padding(
                                           padding:
                                               MediaQuery.of(context).viewInsets,
-                                          child: Scaffold(
-                                            body: GestureDetector(
-                                              onTap: () =>
-                                                  Navigator.pop(context),
-                                            ),
-                                            backgroundColor: Colors.transparent,
-                                            bottomSheet: YearWidget(),
-                                          ),
+                                          child: YearWidget(),
                                         ),
                                       );
                                     },
@@ -1533,14 +1503,7 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                         child: Padding(
                                           padding:
                                               MediaQuery.of(context).viewInsets,
-                                          child: Scaffold(
-                                            body: GestureDetector(
-                                              onTap: () =>
-                                                  Navigator.pop(context),
-                                            ),
-                                            backgroundColor: Colors.transparent,
-                                            bottomSheet: EngineWidget(),
-                                          ),
+                                          child: EngineWidget(),
                                         ),
                                       );
                                     },
@@ -1635,14 +1598,7 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                         child: Padding(
                                           padding:
                                               MediaQuery.of(context).viewInsets,
-                                          child: Scaffold(
-                                            body: GestureDetector(
-                                              onTap: () =>
-                                                  Navigator.pop(context),
-                                            ),
-                                            backgroundColor: Colors.transparent,
-                                            bottomSheet: FuelWidget(),
-                                          ),
+                                          child: FuelWidget(),
                                         ),
                                       );
                                     },
@@ -1737,14 +1693,7 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                         child: Padding(
                                           padding:
                                               MediaQuery.of(context).viewInsets,
-                                          child: Scaffold(
-                                            body: GestureDetector(
-                                              onTap: () =>
-                                                  Navigator.pop(context),
-                                            ),
-                                            backgroundColor: Colors.transparent,
-                                            bottomSheet: HorsePowerWidget(),
-                                          ),
+                                          child: HorsePowerWidget(),
                                         ),
                                       );
                                     },
@@ -1841,15 +1790,7 @@ class _UploadContentWidgetState extends State<UploadContentWidget> {
                                           child: Padding(
                                             padding: MediaQuery.of(context)
                                                 .viewInsets,
-                                            child: Scaffold(
-                                              body: GestureDetector(
-                                                onTap: () =>
-                                                    Navigator.pop(context),
-                                              ),
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              bottomSheet: TransmissionWidget(),
-                                            ),
+                                            child: TransmissionWidget(),
                                           ),
                                         );
                                       },

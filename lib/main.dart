@@ -127,9 +127,9 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'VideoPlayer': VideoPlayerWidget(),
       'Favourites': FavouritesWidget(),
+      'Profile': ProfileWidget(),
       'UploadContent': UploadContentWidget(),
       'ChatList': ChatListWidget(),
-      'Profile': ProfileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -199,10 +199,10 @@ class _NavBarPageState extends State<NavBarPage> {
                 children: [
                   Icon(
                     currentIndex == 2
-                        ? FontAwesomeIcons.plus
-                        : Icons.add_rounded,
+                        ? Icons.person_rounded
+                        : Icons.person_outline,
                     color: currentIndex == 2 ? Color(0xFF0067FF) : Colors.black,
-                    size: 24.0,
+                    size: 25.0,
                   ),
                 ],
               ),
@@ -213,8 +213,8 @@ class _NavBarPageState extends State<NavBarPage> {
                 children: [
                   Icon(
                     currentIndex == 3
-                        ? Icons.chat_bubble_rounded
-                        : Icons.chat_bubble_outline,
+                        ? FontAwesomeIcons.plus
+                        : Icons.add_rounded,
                     color: currentIndex == 3 ? Color(0xFF0067FF) : Colors.black,
                     size: 24.0,
                   ),
@@ -227,10 +227,10 @@ class _NavBarPageState extends State<NavBarPage> {
                 children: [
                   Icon(
                     currentIndex == 4
-                        ? Icons.person_rounded
-                        : Icons.person_outline,
+                        ? Icons.chat_bubble_rounded
+                        : Icons.chat_bubble_outline,
                     color: currentIndex == 4 ? Color(0xFF0067FF) : Colors.black,
-                    size: 25.0,
+                    size: 24.0,
                   ),
                 ],
               ),

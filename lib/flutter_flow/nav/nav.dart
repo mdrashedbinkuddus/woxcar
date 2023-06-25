@@ -170,6 +170,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/forgetPassword',
           requireAuth: true,
           builder: (context, params) => ForgetPasswordWidget(),
+        ),
+        FFRoute(
+          name: 'PostOwnerProfile',
+          path: '/postOwnerProfile',
+          requireAuth: true,
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: PostOwnerProfileWidget(
+              userDoc: params.getParam(
+                  'userDoc', ParamType.DocumentReference, false, ['users']),
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

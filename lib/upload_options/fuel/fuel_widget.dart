@@ -39,105 +39,107 @@ class _FuelWidgetState extends State<FuelWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
-      ),
-      child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        Navigator.pop(context);
-                      },
-                      child: Icon(
-                        Icons.chevron_left_rounded,
-                        color: Colors.black,
-                        size: 30.0,
+    return Align(
+      alignment: AlignmentDirectional(0.0, 1.0),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
+        ),
+        child: Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(
+                          Icons.chevron_left_rounded,
+                          color: Colors.black,
+                          size: 30.0,
+                        ),
                       ),
                     ),
-                  ),
-                  Text(
-                    'Fuel',
-                    style: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily: 'Noto Sans',
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w500,
-                        ),
-                  ),
-                ],
-              ),
-            ),
-            Builder(
-              builder: (context) {
-                final fuels = FFAppState().Fuel.toList();
-                return Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: List.generate(fuels.length, (fuelsIndex) {
-                    final fuelsItem = fuels[fuelsIndex];
-                    return Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            Navigator.pop(context, fuelsItem);
-                          },
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                fuelsItem,
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyLarge
-                                    .override(
-                                      fontFamily: 'Noto Sans',
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 20.0,
-                              ),
-                            ],
+                    Text(
+                      'Fuel',
+                      style: FlutterFlowTheme.of(context).bodyLarge.override(
+                            fontFamily: 'Noto Sans',
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w500,
                           ),
-                        ),
-                        Divider(
-                          height: 30.0,
-                          thickness: 1.0,
-                          color: FlutterFlowTheme.of(context).accent4,
-                        ),
-                      ],
-                    );
-                  }),
-                );
-              },
-            ),
-          ],
+                    ),
+                  ],
+                ),
+              ),
+              Builder(
+                builder: (context) {
+                  final fuels = FFAppState().Fuel.toList();
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: List.generate(fuels.length, (fuelsIndex) {
+                      final fuelsItem = fuels[fuelsIndex];
+                      return Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              Navigator.pop(context, fuelsItem);
+                            },
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  fuelsItem,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        fontFamily: 'Noto Sans',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 20.0,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Divider(
+                            height: 30.0,
+                            thickness: 1.0,
+                            color: FlutterFlowTheme.of(context).accent4,
+                          ),
+                        ],
+                      );
+                    }),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

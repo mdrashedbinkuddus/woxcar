@@ -12,3 +12,5 @@ export '/pages/chat_list/chat_list_widget.dart' show ChatListWidget;
 export '/pages/post_details/post_details_widget.dart' show PostDetailsWidget;
 export '/auth/forget_password/forget_password_widget.dart'
     show ForgetPasswordWidget;
+export '/pages/post_owner_profile/post_owner_profile_widget.dart'
+    show PostOwnerProfileWidget;

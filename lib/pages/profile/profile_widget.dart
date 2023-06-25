@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'profile_model.dart';
@@ -318,20 +317,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                   ],
                 ),
-              ),
-              RatingBar.builder(
-                onRatingUpdate: (newValue) =>
-                    setState(() => _model.ratingBarValue = newValue),
-                itemBuilder: (context, index) => Icon(
-                  Icons.star_sharp,
-                  color: Color(0xFFFFC702),
-                ),
-                direction: Axis.horizontal,
-                initialRating: _model.ratingBarValue ??= 3.0,
-                unratedColor: Color(0xFF868686),
-                itemCount: 5,
-                itemSize: 23.0,
-                glowColor: Color(0xFFFFC702),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 20.0),

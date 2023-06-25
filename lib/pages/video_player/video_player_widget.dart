@@ -1,11 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/options_widget.dart';
 import '/components/search_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -114,21 +114,6 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                             pauseOnNavigate: false,
                           ),
                           Align(
-                            alignment: AlignmentDirectional(0.0, -1.0),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  OptionsWidget(
-                                    key: Key(
-                                        'Keyr4k_${pageViewIndex}_of_${pageViewPostsRecordList.length}'),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Align(
                             alignment: AlignmentDirectional(-1.0, 1.0),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
@@ -146,26 +131,62 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 10.0, 0.0),
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed('Profile');
+                                        child: StreamBuilder<UsersRecord>(
+                                          stream: UsersRecord.getDocument(
+                                              pageViewPostsRecord.postedBy!),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            final circleImageUsersRecord =
+                                                snapshot.data!;
+                                            return InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  'PostOwnerProfile',
+                                                  queryParameters: {
+                                                    'userDoc': serializeParam(
+                                                      circleImageUsersRecord
+                                                          .reference,
+                                                      ParamType
+                                                          .DocumentReference,
+                                                    ),
+                                                  }.withoutNulls,
+                                                );
+                                              },
+                                              child: Container(
+                                                width: 50.0,
+                                                height: 50.0,
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: CachedNetworkImage(
+                                                  imageUrl:
+                                                      circleImageUsersRecord
+                                                          .photoUrl,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            );
                                           },
-                                          child: Container(
-                                            width: 50.0,
-                                            height: 50.0,
-                                            clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: Image.network(
-                                              'https://picsum.photos/seed/906/600',
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
                                         ),
                                       ),
                                       Column(
@@ -291,15 +312,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                                               child: Padding(
                                                 padding: MediaQuery.of(context)
                                                     .viewInsets,
-                                                child: Scaffold(
-                                                  body: GestureDetector(
-                                                    onTap: () =>
-                                                        Navigator.pop(context),
-                                                  ),
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  bottomSheet: SearchWidget(),
-                                                ),
+                                                child: SearchWidget(),
                                               ),
                                             );
                                           },
