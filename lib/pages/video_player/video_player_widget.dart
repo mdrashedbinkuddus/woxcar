@@ -500,7 +500,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 110.0),
+                                        0.0, 0.0, 0.0, 90.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
                                       focusColor: Colors.transparent,
@@ -524,7 +524,9 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                                       ),
                                     ),
                                   ),
-                                ],
+                                ]
+                                    .divide(SizedBox(height: 30.0))
+                                    .around(SizedBox(height: 30.0)),
                               ),
                             ),
                           ),
